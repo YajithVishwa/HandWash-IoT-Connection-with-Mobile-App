@@ -115,72 +115,22 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... voids) {
-            FirebaseDatabase.getInstance().getReference().child("Central_tank").addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     name[0]="Central Tank";
-                    value[0]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                    FirebaseDatabase.getInstance().getReference().child("tank01").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            name[1]="Tank 1";
-                            value[1]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                            FirebaseDatabase.getInstance().getReference().child("tank02").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    name[2]="Tank 2";
-                                    value[2]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                                    FirebaseDatabase.getInstance().getReference().child("tank03").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            name[3]="Tank 3";
-                                            value[3]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                                            FirebaseDatabase.getInstance().getReference().child("tank04").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    name[4]="Tank 4";
-                                                    value[4]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                                                    FirebaseDatabase.getInstance().getReference().child("tank05").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            name[5]="Tank 5";
-                                                            value[5]=Integer.parseInt(String.valueOf(dataSnapshot.child("level").getValue()));
-                                                            publishProgress(name);
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                        }
-                                                    });
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    value[0]=Integer.parseInt(String.valueOf(dataSnapshot.child("Central_tank").child("level").getValue()));
+                    name[1]="Tank 1";
+                    value[1]=Integer.parseInt(String.valueOf(dataSnapshot.child("tank01").child("level").getValue()));
+                    name[2]="Tank 2";
+                    value[2]=Integer.parseInt(String.valueOf(dataSnapshot.child("tank02").child("level").getValue()));
+                    name[3]="Tank 3";
+                    value[3]=Integer.parseInt(String.valueOf(dataSnapshot.child("tank03").child("level").getValue()));
+                    name[4]="Tank 4";
+                    value[4]=Integer.parseInt(String.valueOf(dataSnapshot.child("tank04").child("level").getValue()));
+                    name[5]="Tank 5";
+                    value[5]=Integer.parseInt(String.valueOf(dataSnapshot.child("tank05").child("level").getValue()));
+                    publishProgress(name);
                 }
 
                 @Override
